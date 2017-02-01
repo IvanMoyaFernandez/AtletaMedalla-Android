@@ -169,7 +169,7 @@ public class AtletaListActivity extends AppCompatActivity implements AtletaCallb
         public void onBindViewHolder(final ViewHolder holder, final int position) {
             holder.mItem = mValues.get(position);
             holder.mIdView.setText(mValues.get(position).getId().toString());
-            holder.mContentView.setText(mValues.get(position).getNombre());
+            holder.mContentView.setText(mValues.get(position).getNombre() + " " + mValues.get(position).getApellidos());
 
             holder.mView.setOnClickListener(new View.OnClickListener() {
                 @Override
