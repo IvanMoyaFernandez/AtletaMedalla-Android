@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +13,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.taniafontcuberta.basketball.R;
+import com.taniafontcuberta.basketball.controller.activities.add_edit.AddEditAtletaActivity;
 import com.taniafontcuberta.basketball.controller.managers.AtletaCallback;
 import com.taniafontcuberta.basketball.controller.managers.AtletaManager;
 import com.taniafontcuberta.basketball.model.Atleta;
@@ -53,17 +55,17 @@ public class AtletaDetailFragment extends Fragment implements AtletaCallback {
             if (appBarLayout != null) {
                 appBarLayout.setTitle(mItem.getNombre());
             }
-            /*
+
             FloatingActionButton edit = (FloatingActionButton) activity.findViewById(R.id.edit);
             edit.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent = new Intent(view.getContext(), AddEditActivity.class); // intent en fragments
+                    Intent intent = new Intent(view.getContext(), AddEditAtletaActivity.class); // intent en fragments
                     intent.putExtra("id", mItem.getId().toString());
                     intent.putExtra("type", "edit");
                     startActivityForResult(intent, 0);
                 }
-            });
+            }); /*
             FloatingActionButton editTeam = (FloatingActionButton) activity.findViewById(R.id.edit);
             editTeam.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
@@ -95,7 +97,7 @@ public class AtletaDetailFragment extends Fragment implements AtletaCallback {
         });
         // Show the dummy content as text in a TextView.
         if (mItem != null) {
-            ((TextView) rootView.findViewById(R.id.player_detail)).setText(
+            ((TextView) rootView.findViewById(R.id.atleta_detail)).setText(
                     "ID: " + mItem.getId().toString());
             ((TextView) rootView.findViewById(R.id.atleta_nombre)).setText(
                     "Nombre: " + mItem.getNombre().toString());
