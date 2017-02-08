@@ -16,7 +16,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.taniafontcuberta.basketball.R;
-import com.taniafontcuberta.basketball.controller.activities.add_edit.AddEditActivity;
+import com.taniafontcuberta.basketball.controller.activities.add_edit.AddEditAtletaActivity;
 import com.taniafontcuberta.basketball.controller.activities.login.LoginActivity;
 import com.taniafontcuberta.basketball.controller.managers.AtletaCallback;
 import com.taniafontcuberta.basketball.controller.managers.AtletaManager;
@@ -49,7 +49,7 @@ public class AtletaListActivity extends AppCompatActivity implements AtletaCallb
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(),AddEditActivity.class);
+                Intent intent = new Intent(view.getContext(),AddEditAtletaActivity.class);
                 intent.putExtra("type","add");
                 startActivityForResult(intent, 0);
             }
@@ -184,7 +184,7 @@ public class AtletaListActivity extends AppCompatActivity implements AtletaCallb
                                 .commit();
                     } else {
                         Context context = v.getContext();
-                        Intent intent = new Intent(context, AtletaDetailFragment.class);
+                        Intent intent = new Intent(context, AtletaDetailActivity.class);
                         intent.putExtra(AtletaDetailFragment.ARG_ITEM_ID, holder.mItem.getId().toString());
 
                         context.startActivity(intent);

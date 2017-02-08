@@ -12,7 +12,7 @@
         android:layout_height="match_parent"
         android:padding="13dp"
         android:textIsSelectable="true"
-        tools:context="com.example.basketball.controller.activities.master_detail.AtletaDetailFragment" />
+        tools:context="com.taniafontcuberta.basketball.controller.activities.master_detail.AtletaDetailFragment" />
 
     <TextView xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
@@ -23,6 +23,37 @@
         android:padding="13dp"
         android:textIsSelectable="true"
         tools:context="com.example.basketball.controller.activities.master_detail.AtletaDetailFragment" />
+
+    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/atleta_apellidos"
+        style="?android:attr/textAppearanceLarge"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="13dp"
+        android:textIsSelectable="true"
+        tools:context="com.example.basketball.controller.activities.master_detail.AtletaDetailFragment" />
+
+    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/atleta_nacionalidad"
+        style="?android:attr/textAppearanceLarge"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="13dp"
+        android:textIsSelectable="true"
+        tools:context="com.example.basketball.controller.activities.master_detail.AtletaDetailFragment" />
+
+    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/atleta_fechaNacimiento"
+        style="?android:attr/textAppearanceLarge"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="13dp"
+        android:textIsSelectable="true"
+        tools:context="com.example.basketball.controller.activities.master_detail.AtletaDetailFragment" />
+
 
     <TextView xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"

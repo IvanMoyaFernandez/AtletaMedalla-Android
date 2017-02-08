@@ -101,8 +101,14 @@ public class AtletaDetailFragment extends Fragment implements AtletaCallback {
                     "ID: " + mItem.getId().toString());
             ((TextView) rootView.findViewById(R.id.atleta_nombre)).setText(
                     "Nombre: " + mItem.getNombre().toString());
-            ((TextView) rootView.findViewById(R.id.atleta_medalla)).setText(
-                    "Medalla: " + mItem.getMedalla().toString());
+            ((TextView) rootView.findViewById(R.id.atleta_apellidos)).setText(
+                    "Apellidos: " + mItem.getApellidos().toString());
+            ((TextView) rootView.findViewById(R.id.atleta_nacionalidad)).setText(
+                    "Nacionalidad: " + mItem.getNacionalidad().toString());
+            ((TextView) rootView.findViewById(R.id.atleta_fechaNacimiento)).setText(
+                    "Fecha Nacimiento: " + mItem.getFechaNacimiento().toString());
+//            ((TextView) rootView.findViewById(R.id.atleta_medalla)).setText(
+//                    "Medalla: " + mItem.getMedalla().toString());
         }
 
         return rootView;

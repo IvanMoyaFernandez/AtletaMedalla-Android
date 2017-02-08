@@ -13,24 +13,22 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.taniafontcuberta.basketball.R;
-import com.taniafontcuberta.basketball.controller.activities.master_detail.PlayerListActivity;
+import com.taniafontcuberta.basketball.controller.activities.master_detail.AtletaListActivity;
 import com.taniafontcuberta.basketball.controller.managers.AtletaCallback;
 import com.taniafontcuberta.basketball.controller.managers.AtletaManager;
-import com.taniafontcuberta.basketball.controller.managers.PlayerManager;
 import com.taniafontcuberta.basketball.model.Atleta;
-import com.taniafontcuberta.basketball.model.Player;
-import com.taniafontcuberta.basketball.model.Team;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * A Add screen that offers Add via username/basketsView.
@@ -58,7 +56,6 @@ public class AddEditAtletaActivity extends AppCompatActivity implements AtletaCa
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
      */
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -112,7 +109,11 @@ public class AddEditAtletaActivity extends AppCompatActivity implements AtletaCa
         addButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                attemptAdd(view);
+                try {
+                    attemptAdd(view);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
             }
         });
 
@@ -127,7 +128,7 @@ public class AddEditAtletaActivity extends AppCompatActivity implements AtletaCa
      * If there are form errors (invalid username, missing fields, etc.), the
      * errors are presented and no actual Add attempt is made.
      */
-    private void attemptAdd(View v) {
+    private void attemptAdd(View v) throws ParseException {
         // Reset errors.
         nombreView.setError(null);
         apellidosView.setError(null);
@@ -171,29 +172,6 @@ public class AddEditAtletaActivity extends AppCompatActivity implements AtletaCa
             cancel = true;
         }
 
-        if (TextUtils.isEmpty(rebounds)) {
-            reboundsView.setError(getString(R.string.error_field_required));
-            focusView = reboundsView;
-            cancel = true;
-        }
-        if(Integer.parseInt(rebounds) < 0){
-            reboundsView.setError(" < 0");
-            focusView = reboundsView;
-            cancel = true;
-        }
-        if (TextUtils.isEmpty(assists)) {
-            assistsView.setError(getString(R.string.error_field_required));
-            focusView = assistsView;
-            cancel = true;
-        }
-        if(Integer.parseInt(assists) < 0){
-            reboundsView.setError(" < 0");
-            focusView = reboundsView;
-            cancel = true;
-        }
-
-
-
         if (cancel) {
             // There was an error; don't attempt Add and focus the first
             // form field with an error.
@@ -202,31 +180,30 @@ public class AddEditAtletaActivity extends AppCompatActivity implements AtletaCa
             // Show a progress spinner, and kick off a background task to
             // perform the user Add attempt.
             showProgress(true);
-
-            player.setName(name);
-            player.setBaskets(Integer.parseInt(baskets));
-            player.setAssists(Integer.parseInt(assists));
-            player.setRebounds(Integer.parseInt(rebounds));
-            player.setFieldPosition(fieldPosition);
-            player.setBirthdate(birthdate);
+            DateFormat format = new SimpleDateFormat("MM dd, yyyy", Locale.ENGLISH);
+            atleta.setNombre(nombre);
+            atleta.setApellidos(apellidos);
+            atleta.setNacionalidad(nacionalidad);
+            atleta.setFechaNacimiento(format.parse(fechaNacimiento));
 
             if (extras.getString("type").equals("add")) {
-                PlayerManager.getInstance().createPlayer(AddEditAtletaActivity.this, player);
-                Toast.makeText(AddEditAtletaActivity.this, "Created :  " + player.getName(), Toast.LENGTH_LONG).show();
+                AtletaManager.getInstance().createAtleta(AddEditAtletaActivity.this, atleta);
+                Toast.makeText(AddEditAtletaActivity.this, "Created :  " + atleta.getNombre(), Toast.LENGTH_LONG).show();
             } else {
-                player.setId(Long.parseLong(id));
-                PlayerManager.getInstance().updatePlayer(AddEditAtletaActivity.this, player);
+               /* atleta.setId(Long.parseLong(id));
+                AtletaManager.getInstance().updateAtleta(AddEditAtletaActivity.this, atleta);
                 Toast.makeText(AddEditAtletaActivity.this, "Edited  :   " + player.getName(), Toast.LENGTH_LONG).show();
+                */
 
             }
-            Intent i = new Intent(v.getContext(), PlayerListActivity.class);
+            Intent i = new Intent(v.getContext(), AtletaListActivity.class);
             startActivity(i);
 
         }
     }
 
     @Override
-    public void onSuccess(List<Player> playerList) {
+    public void onSuccess(List<Atleta> atletaList) {
 
     }
 
@@ -234,7 +211,7 @@ public class AddEditAtletaActivity extends AppCompatActivity implements AtletaCa
     public void onSucces() {
 
     }
-
+/*
     @Override
     public void onSuccessTeam(List<Team> teamList) {
         teams = teamList;
@@ -247,7 +224,7 @@ public class AddEditAtletaActivity extends AppCompatActivity implements AtletaCa
         }
 
         /* ADD SELECTED TEAM TO PLAYER */
-        teamView.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+/*        teamView.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View view, int position, long id) {
                 player.setTeam(teams.get(position));
@@ -259,7 +236,7 @@ public class AddEditAtletaActivity extends AppCompatActivity implements AtletaCa
             }
         });
     }
-
+*/
     @Override
     public void onFailure(Throwable t) {
         Log.e("AddEditActivity->", "performAdd->onFailure ERROR " + t.getMessage());
