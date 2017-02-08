@@ -1,3 +1,5 @@
+// Clase que se encarga de desplegar la información del atleta seleccionado en AtletaListActivity
+// dentro de la activity res/layout/activity_atleta_detail
 package com.taniafontcuberta.basketball.controller.activities.master_detail;
 
 import android.content.Intent;
