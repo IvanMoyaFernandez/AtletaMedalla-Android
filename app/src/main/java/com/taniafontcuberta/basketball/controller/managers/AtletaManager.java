@@ -107,27 +107,27 @@ public class AtletaManager {
         });
     }
 
-    /* PUT - UPDATE PLAYER */ /*
-    public synchronized void updatePlayer(final PlayerCallback playerCallback, Player player) {
-        Call <Player> call = playerService.updatePlayer(UserLoginManager.getInstance().getBearerToken() ,player);
-        call.enqueue(new Callback<Player>() {
+    /* PUT - UPDATE ATLETA */
+    public synchronized void updateAtleta(final AtletaCallback atletaCallback, Atleta atleta) {
+        Call <Atleta> call = atletaService.updateAtleta(UserLoginManager.getInstance().getBearerToken() ,atleta);
+        call.enqueue(new Callback<Atleta>() {
             @Override
-            public void onResponse(Call<Player> call, Response<Player> response) {
+            public void onResponse(Call<Atleta> call, Response<Atleta> response) {
                 int code = response.code();
 
                 if (code == 200 || code == 201) {
-                    Log.e("Player->", "updatePlayer: OOK" + 100);
+                    Log.e("Atleta->", "updateAtleta: OK" + 100);
 
                 } else {
-                    playerCallback.onFailure(new Throwable("ERROR" + code + ", " + response.raw().message()));
+                    atletaCallback.onFailure(new Throwable("ERROR" + code + ", " + response.raw().message()));
                 }
             }
 
             @Override
-            public void onFailure(Call<Player> call, Throwable t) {
-                Log.e("PlayerManager->", "updatePlayer: " + t);
+            public void onFailure(Call<Atleta> call, Throwable t) {
+                Log.e("AtletaManager->", "updateAtleta: " + t);
 
-                playerCallback.onFailure(t);
+                atletaCallback.onFailure(t);
             }
         });
     }

@@ -99,11 +99,10 @@ public class AddEditAtletaActivity extends AppCompatActivity implements AtletaCa
                 nombreView.setText(AtletaManager.getInstance().getAtleta(id).getNombre());
                 apellidosView.setText(AtletaManager.getInstance().getAtleta(id).getApellidos());
                 nacionalidadView.setText(AtletaManager.getInstance().getAtleta(id).getNacionalidad());
-            /* Get birthDate, split by "-", and update datePicker */
-                String birthdateGet = AtletaManager.getInstance().getAtleta(id).getFechaNacimiento().toString();
-                String[] date = birthdateGet.split("-");
-                fechaNacimientoView.updateDate(Integer.parseInt(date[0]), Integer.parseInt(date[1]) - 1, Integer.parseInt(date[2]));
-
+                DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                String fecha = dateFormat.format(AtletaManager.getInstance().getAtleta(id).getFechaNacimiento());
+                String[] fechaString = fecha.split("-");
+                fechaNacimientoView.updateDate(Integer.parseInt(fechaString[0]),Integer.parseInt(fechaString[1])-1,Integer.parseInt(fechaString[2]));
 
         }
         addButton.setOnClickListener(new OnClickListener() {
@@ -188,13 +187,11 @@ public class AddEditAtletaActivity extends AppCompatActivity implements AtletaCa
 
             if (extras.getString("type").equals("add")) {
                 AtletaManager.getInstance().createAtleta(AddEditAtletaActivity.this, atleta);
-                Toast.makeText(AddEditAtletaActivity.this, "Created :  " + atleta.getNombre(), Toast.LENGTH_LONG).show();
+                Toast.makeText(AddEditAtletaActivity.this, "Creado :  " + atleta.getNombre(), Toast.LENGTH_LONG).show();
             } else {
-               /* atleta.setId(Long.parseLong(id));
+                atleta.setId(Long.parseLong(id));
                 AtletaManager.getInstance().updateAtleta(AddEditAtletaActivity.this, atleta);
-                Toast.makeText(AddEditAtletaActivity.this, "Edited  :   " + player.getName(), Toast.LENGTH_LONG).show();
-                */
-
+                Toast.makeText(AddEditAtletaActivity.this, "Editado  :   " + atleta.getNombre(), Toast.LENGTH_LONG).show();
             }
             Intent i = new Intent(v.getContext(), AtletaListActivity.class);
             startActivity(i);
