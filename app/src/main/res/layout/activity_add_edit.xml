@@ -61,7 +61,7 @@
                     android:id="@+id/nombreAtleta"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Name"
+                    android:hint="Nombre"
                     android:inputType="text"
                     android:maxLines="1"
                     android:singleLine="true" />
@@ -76,11 +76,11 @@
                     android:id="@+id/apellidosAtleta"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Baskets"
+                    android:hint="Apellidos"
                     android:imeActionId="@+id/add_edit"
                     android:imeActionLabel="next"
                     android:imeOptions="actionUnspecified"
-                    android:inputType="number"
+                    android:inputType="text"
                     android:maxLines="1"
                     android:singleLine="true" />
 
@@ -94,22 +94,28 @@
                     android:id="@+id/nacionalidadAtleta"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Rebounds"
+                    android:hint="Nacionalidad"
                     android:imeActionId="@+id/add_edit"
                     android:imeActionLabel="Next"
                     android:imeOptions="actionUnspecified"
-                    android:inputType="number"
+                    android:inputType="text"
                     android:maxLines="1"
                     android:singleLine="true" />
 
             </android.support.design.widget.TextInputLayout>
 
-            <DatePicker
+            <CalendarView
+                android:id="@+id/fechaNacimientoAtleta"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:imeActionId="@+id/add_edit_button"/>
+
+          <!--  <DatePicker
                 android:id="@+id/fechaNacimientoAtleta"
                 android:datePickerMode="calendar"
                 android:imeActionId="@+id/add_edit_button"
                 android:layout_height="wrap_content"
-                android:layout_width="wrap_content"/>
+                android:layout_width="wrap_content"/> -->
 
             <Button
                 android:id="@+id/add_edit_button"

@@ -180,7 +180,7 @@ public class AddEditAtletaActivity extends AppCompatActivity implements AtletaCa
             // Show a progress spinner, and kick off a background task to
             // perform the user Add attempt.
             showProgress(true);
-            DateFormat format = new SimpleDateFormat("MM dd, yyyy", Locale.ENGLISH);
+            DateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
             atleta.setNombre(nombre);
             atleta.setApellidos(apellidos);
             atleta.setNacionalidad(nacionalidad);
