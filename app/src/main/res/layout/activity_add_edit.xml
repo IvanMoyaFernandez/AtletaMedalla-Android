@@ -104,18 +104,18 @@
 
             </android.support.design.widget.TextInputLayout>
 
-            <CalendarView
+            <!--<CalendarView
                 android:id="@+id/fechaNacimientoAtleta"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:imeActionId="@+id/add_edit_button"/>
+                android:imeActionId="@+id/add_edit_button"/>-->
 
-          <!--  <DatePicker
+            <DatePicker
                 android:id="@+id/fechaNacimientoAtleta"
                 android:datePickerMode="calendar"
                 android:imeActionId="@+id/add_edit_button"
                 android:layout_height="wrap_content"
-                android:layout_width="wrap_content"/> -->
+                android:layout_width="wrap_content"/> 
 
             <Button
                 android:id="@+id/add_edit_button"
