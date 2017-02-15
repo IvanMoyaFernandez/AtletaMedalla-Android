@@ -50,6 +50,8 @@ public class AtletaListActivity extends AppCompatActivity implements AtletaCallb
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(),AddEditAtletaActivity.class);
+                // Le enviamos a la nueva vista que vamos a abrir (AddEditActivity) un extra,
+                // en este caso le decimos que será de tipo type y el parametro add
                 intent.putExtra("type","add");
                 startActivityForResult(intent, 0);
             }

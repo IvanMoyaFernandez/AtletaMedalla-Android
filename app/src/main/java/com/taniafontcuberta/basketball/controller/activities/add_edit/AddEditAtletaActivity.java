@@ -35,7 +35,7 @@ import java.util.Locale;
  */
 public class AddEditAtletaActivity extends AppCompatActivity implements AtletaCallback {
 
-    // UI references.
+    // Estas variables harán referencia a las id de los elementos en la vista activity_add_edit
     private EditText nombreView;
     private EditText apellidosView;
     private EditText nacionalidadView;
@@ -43,62 +43,78 @@ public class AddEditAtletaActivity extends AppCompatActivity implements AtletaCa
     private Atleta atleta;
     private Bundle extras;
 
-    // ATTR
+    // Variables que serán rellenadas con los datos que introduce el usuario
     private String nombre;
     private String apellidos;
     private String nacionalidad;
     private String fechaNacimiento;
     private String id;
 
+    // Variables de tipo vista que serán rellenadas con la configuración de las vistas
     private View mProgressView;
     private View mAddFormView;
-    /**
-     * ATTENTION: This was auto-generated to implement the App Indexing API.
-     * See https://g.co/AppIndexing/AndroidStudio for more information.
-     */
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         extras = getIntent().getExtras();
+        // si el extra que ha recibido de la vista antecesora (AtletaListActivity)
+        // es de tipo type y de parametro add en la barra del titulo escribiremos Añadir atleta
         if (extras.getString("type").equals("add")) {
             setTitle("Añadir Atleta");
+        // de lo contrario escribiremos Editar Atleta
         } else {
             setTitle("Editar Atleta");
         }
+        // Abrimos la activity activity_add_edit
         setContentView(R.layout.activity_add_edit);
 
         atleta = new Atleta();
 
+        // Rellenamos la actionbar (barra superior) con el titulo configurado anteriormente
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         toolbar.setTitle(getTitle());
 
-        // Show the Up button in the action bar.
+        // Si hay actionbar (barra superior) mostramos el boton atras (la flecha en la izquierda)
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
 
-        // Set up the Add form.
+        // Configuramos los elementos de la vista, asociando los elementos de
+        // la vista activity_add_edit con las variables creadas al principio
         nombreView = (EditText) findViewById(R.id.nombreAtleta);
         apellidosView = (EditText) findViewById(R.id.apellidosAtleta);
         nacionalidadView = (EditText) findViewById(R.id.nacionalidadAtleta);
         fechaNacimientoView = (DatePicker) findViewById(R.id.fechaNacimientoAtleta);
 
+        // Configuramos el boton añadir / editar
         Button addButton = (Button) findViewById(R.id.add_edit_button);
 
         switch (extras.getString("type")) {
+            // si el extra que venia al abrir la activity es add en el boton pondrá Añadir
             case "add":
                 addButton.setText("Añadir Atleta");
                 break;
+            // su venia edit en el boton pondrá Editar y rellenará los componentes de la vista
+            // según los parametros de la base de datos, que accederá a ellos mediante:
+            // AtletaManager.java para recibir el objeto Atleta y todos los atributos y posteriormente
+            // con los getters creados en Atleta.java
             case "edit":
                 addButton.setText("Editar Atleta");
-
+                // la activity antecesora mediante un extra ha enviado la id del atleta
+                // así conseguimos acceder a cada parametro del Atleta seleccionado para ser editado
+                // con esto conseguimos que al visualizar la activity de edición de un atleta ya esté rellenada
+                // con la información guardad en la base de datos.
                 id = extras.getString("id");
                 nombreView.setText(AtletaManager.getInstance().getAtleta(id).getNombre());
                 apellidosView.setText(AtletaManager.getInstance().getAtleta(id).getApellidos());
                 nacionalidadView.setText(AtletaManager.getInstance().getAtleta(id).getNacionalidad());
+                // La fecha está guardad en la base de datos como tipo Date con el formato (yyyy-MM-dd)
+                // Tenemos que decirle que está guardada en ese formato y separada por guiones para
+                // que el componente que muestra la fecha pueda coger cada parametro de la fecha.
+                // (dia, mes y año)
                 DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
                 String fecha = dateFormat.format(AtletaManager.getInstance().getAtleta(id).getFechaNacimiento());
                 String[] fechaString = fecha.split("-");
@@ -115,6 +131,7 @@ public class AddEditAtletaActivity extends AppCompatActivity implements AtletaCa
                 }
             }
         });
+
 
         mAddFormView = findViewById(R.id.add_edit_form);
         mProgressView = findViewById(R.id.add_edit_progress);
