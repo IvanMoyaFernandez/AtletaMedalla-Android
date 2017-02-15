@@ -158,30 +158,29 @@ public class AtletaManager {
     }
 
     /* GET - TOP PLAYERS BY NAME */
-/*
-    public synchronized void getPlayerByName(final PlayerCallback playerCallback,String name) {
+
+    public synchronized void getAtletaByName(final AtletaCallback atletaCallback,String name) {
         // Call<List<Apuesta>> call = playerService.getAllPlayer(UserLoginManager.getInstance(context).getBearerToken());
-        Call<List<Player>> call = playerService.getPlayerByName(UserLoginManager.getInstance().getBearerToken(), name);
-        call.enqueue(new Callback<List<Player>>() {
+        Call<List<Atleta>> call = atletaService.getAtletasByName(UserLoginManager.getInstance().getBearerToken(), name);
+        call.enqueue(new Callback<List<Atleta>>() {
             @Override
-            public void onResponse(Call<List<Player>> call, Response<List<Player>> response) {
-                players = response.body();
+            public void onResponse(Call<List<Atleta>> call, Response<List<Atleta>> response) {
+                atletas = response.body();
 
                 int code = response.code();
 
                 if (code == 200 || code == 201) {
-                    playerCallback.onSuccess(players);
-
+                    atletaCallback.onSuccess(atletas);
                 } else {
-                    playerCallback.onFailure(new Throwable("ERROR" + code + ", " + response.raw().message()));
+                    atletaCallback.onFailure(new Throwable("ERROR" + code + ", " + response.raw().message()));
                 }
             }
 
             @Override
-            public void onFailure(Call<List<Player>> call, Throwable t) {
-                Log.e("PlayerManager->", "getPlayerByName: " + t);
+            public void onFailure(Call<List<Atleta>> call, Throwable t) {
+                Log.e("AtletaManager->", "getAtletaByName: " + t);
 
-                playerCallback.onFailure(t);
+                atletaCallback.onFailure(t);
             }
         });
     }

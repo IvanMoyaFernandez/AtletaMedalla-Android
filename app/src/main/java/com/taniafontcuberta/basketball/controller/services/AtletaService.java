@@ -39,13 +39,13 @@ public interface AtletaService {
 
 
     /* FILTERS */
-/*
-    @GET("api/players/byName/{name}")
-    Call<List<Player>> getPlayerByName(
+
+    @GET("api/atletas/byName/{name}")
+    Call<List<Atleta>> getAtletasByName(
 
             @Header("Authorization") String Authorization,
             @Path("name") String name);
-
+/*
     @GET("api/players/topBaskets/{baskets}")
     Call<List<Player>> getPlayersByBaskets(
 
