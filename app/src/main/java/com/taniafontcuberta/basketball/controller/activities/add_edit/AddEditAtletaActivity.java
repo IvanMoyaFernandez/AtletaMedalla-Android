@@ -30,9 +30,6 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Locale;
 
-/**
- * A Add screen that offers Add via username/basketsView.
- */
 public class AddEditAtletaActivity extends AppCompatActivity implements AtletaCallback {
 
     // Estas variables harán referencia a las id de los elementos en la vista activity_add_edit
@@ -121,6 +118,8 @@ public class AddEditAtletaActivity extends AppCompatActivity implements AtletaCa
                 fechaNacimientoView.updateDate(Integer.parseInt(fechaString[0]),Integer.parseInt(fechaString[1])-1,Integer.parseInt(fechaString[2]));
 
         }
+        // Si se hace click en el boton addButton localizado en la vista activity_add_edit
+        // se abrirá una vista con lo que se tiene que ejecutar en la funcion attemptAdd
         addButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -132,25 +131,22 @@ public class AddEditAtletaActivity extends AppCompatActivity implements AtletaCa
             }
         });
 
-
+        // rellenamos las vistas con los elementos de la activity activity_add_edit
         mAddFormView = findViewById(R.id.add_edit_form);
         mProgressView = findViewById(R.id.add_edit_progress);
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
     }
 
-    /**
-     * Attempts to log in the account specified by the Add form.
-     * If there are form errors (invalid username, missing fields, etc.), the
-     * errors are presented and no actual Add attempt is made.
-     */
+    // En esta función no solo comprobamos que los campos de texto están rellenado, sino que comprobamos
+    // que estén rellenados correctamente.
+    // En el caso de que los datos sean correctos serán añadidos a la bbdd
     private void attemptAdd(View v) throws ParseException {
         // Reset errors.
         nombreView.setError(null);
         apellidosView.setError(null);
         nacionalidadView.setError(null);
 
-        // Store values at the  Add attempt.
+        // Rellenamos las variables locales creadas al principio con los datos
+        // introducidos por el usuario.
         nombre = nombreView.getText().toString();
         apellidos = this.apellidosView.getText().toString();
         nacionalidad = this.nacionalidadView.getText().toString();
@@ -159,6 +155,8 @@ public class AddEditAtletaActivity extends AppCompatActivity implements AtletaCa
         String month = String.valueOf(this.fechaNacimientoView.getMonth() + 1);
         String day = String.valueOf(this.fechaNacimientoView.getDayOfMonth());
 
+        // Editamos la fecha a la hora de ser guardad en la base de datos, añadiendo ceros en el caso
+        // de que el dia o el mes sean menores de 10
         if (this.fechaNacimientoView.getDayOfMonth() < 10) {
             day = "0" + day;
         }
@@ -170,7 +168,8 @@ public class AddEditAtletaActivity extends AppCompatActivity implements AtletaCa
         boolean cancel = false;
         View focusView = null;
 
-        // Check for a valid basketsView, if the user entered one.
+        // Comprueba que los campos no esten vacios,
+        // en el caso de estarlos muestra una advertencia.
 // RECUERDA PASAR EL getString(R.string.error_field_required) A CASTELLANO!!
         if (TextUtils.isEmpty(nombre)) {
             nombreView.setError(getString(R.string.error_field_required));
@@ -189,27 +188,34 @@ public class AddEditAtletaActivity extends AppCompatActivity implements AtletaCa
         }
 
         if (cancel) {
-            // There was an error; don't attempt Add and focus the first
-            // form field with an error.
+            // En el caso de que haya habido algun error al introducir los datos se mostraran los errores
+            // y no se introduciran en la bbdd
             focusView.requestFocus();
         } else {
-            // Show a progress spinner, and kick off a background task to
-            // perform the user Add attempt.
+            // En el caso de que no haya ningun error muestra una barra de progreso (progress spinner),
+            // e inicia una tarea en segundo plano para realizar el intento de añadir el atleta.
+            // Se ejecuta la funcion showProgress
             showProgress(true);
             DateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
+            // Añadimos los parametros introducidos por el usuario mediante los setters creados en Atleta.java
             atleta.setNombre(nombre);
             atleta.setApellidos(apellidos);
             atleta.setNacionalidad(nacionalidad);
             atleta.setFechaNacimiento(format.parse(fechaNacimiento));
 
+            // En el caso de que el extra recibido por la activity antecesora sea add la función a realizar será
+            // createAteta de AtletaManager.java y mostrará el mensage de atleta creado
             if (extras.getString("type").equals("add")) {
                 AtletaManager.getInstance().createAtleta(AddEditAtletaActivity.this, atleta);
                 Toast.makeText(AddEditAtletaActivity.this, "Creado :  " + atleta.getNombre(), Toast.LENGTH_LONG).show();
+            // En el caso de que el extra recibido por la activity antecesora sea edit la función a realizar será
+            // updateAtleta de AtletaManager.java y mostrará el mensage de atleta editado
             } else {
                 atleta.setId(Long.parseLong(id));
                 AtletaManager.getInstance().updateAtleta(AddEditAtletaActivity.this, atleta);
                 Toast.makeText(AddEditAtletaActivity.this, "Editado  :   " + atleta.getNombre(), Toast.LENGTH_LONG).show();
             }
+            // Una vez creado o editado el atleta volveremos a la activity que contiene la lista.
             Intent i = new Intent(v.getContext(), AtletaListActivity.class);
             startActivity(i);
 
@@ -251,17 +257,14 @@ public class AddEditAtletaActivity extends AppCompatActivity implements AtletaCa
         });
     }
 */
+    // En el caso de que algo falle se mostrará el error por el terminal
     @Override
     public void onFailure(Throwable t) {
         Log.e("AddEditActivity->", "performAdd->onFailure ERROR " + t.getMessage());
-
-        // TODO: Gestionar los diversos tipos de errores. Por ejemplo, no se ha podido conectar correctamente.
         showProgress(false);
     }
 
-    /**
-     * Shows the progress UI and hides the Add form.
-     */
+    // Muestra la barra de progreso y oculta el formulario
     @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
     private void showProgress(final boolean show) {
         // On Honeycomb MR2 we have the ViewPropertyAnimator APIs, which allow
@@ -297,4 +300,3 @@ public class AddEditAtletaActivity extends AppCompatActivity implements AtletaCa
 
 
 }
-
