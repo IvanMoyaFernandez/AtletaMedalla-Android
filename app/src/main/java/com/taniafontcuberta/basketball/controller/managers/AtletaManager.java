@@ -90,9 +90,7 @@ public class AtletaManager {
                 int code = response.code();
 
                 if (code == 200 || code == 201) {
-                    //playerCallback.onSuccess1(apuestas1x2);
                     Log.e("Atleta->", "createAtleta: OK" + 100);
-
                 } else {
                     atletaCallback.onFailure(new Throwable("ERROR" + code + ", " + response.raw().message()));
                 }
@@ -101,7 +99,6 @@ public class AtletaManager {
             @Override
             public void onFailure(Call<Atleta> call, Throwable t) {
                 Log.e("PlayerManager->", "createPlayer: " + t);
-
                 atletaCallback.onFailure(t);
             }
         });
@@ -117,7 +114,6 @@ public class AtletaManager {
 
                 if (code == 200 || code == 201) {
                     Log.e("Atleta->", "updateAtleta: OK" + 100);
-
                 } else {
                     atletaCallback.onFailure(new Throwable("ERROR" + code + ", " + response.raw().message()));
                 }
@@ -126,14 +122,13 @@ public class AtletaManager {
             @Override
             public void onFailure(Call<Atleta> call, Throwable t) {
                 Log.e("AtletaManager->", "updateAtleta: " + t);
-
                 atletaCallback.onFailure(t);
             }
         });
     }
 
-    /* DELETE - DELETE PLAYER */
-    public synchronized void deletePlayer(final AtletaCallback atletaCallback, Long id) {
+    /* DELETE ATLETA */
+    public synchronized void deleteAtleta(final AtletaCallback atletaCallback, Long id) {
         Call <Void> call = atletaService.deleteAtleta(UserLoginManager.getInstance().getBearerToken() ,id);
         call.enqueue(new Callback<Void>() {
             @Override
@@ -142,7 +137,6 @@ public class AtletaManager {
 
                 if (code == 200 || code == 201) {
                     Log.e("Atleta->", "Deleted: OK");
-
                 } else {
                     atletaCallback.onFailure(new Throwable("ERROR" + code + ", " + response.raw().message()));
                 }
@@ -151,17 +145,16 @@ public class AtletaManager {
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
                 Log.e("AtletaManager->", "deleteAtleta: " + t);
-
                 atletaCallback.onFailure(t);
             }
         });
     }
 
-    /* GET - TOP PLAYERS BY NAME */
+    /* GET - TOP ATLETAS BY NAME */
 
     public synchronized void getAtletaByName(final AtletaCallback atletaCallback,String name) {
         // Call<List<Apuesta>> call = playerService.getAllPlayer(UserLoginManager.getInstance(context).getBearerToken());
-        Call<List<Atleta>> call = atletaService.getAtletasByName(UserLoginManager.getInstance().getBearerToken(), name);
+        Call<List<Atleta>> call = atletaService.getAtletaByName(UserLoginManager.getInstance().getBearerToken(), name);
         call.enqueue(new Callback<List<Atleta>>() {
             @Override
             public void onResponse(Call<List<Atleta>> call, Response<List<Atleta>> response) {

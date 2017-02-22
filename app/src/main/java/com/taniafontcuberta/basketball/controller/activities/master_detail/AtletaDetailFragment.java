@@ -90,12 +90,12 @@ public class AtletaDetailFragment extends Fragment implements AtletaCallback {
         delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AtletaManager.getInstance().deletePlayer(AtletaDetailFragment.this, mItem.getId());
+                AtletaManager.getInstance().deleteAtleta(AtletaDetailFragment.this, mItem.getId());
                 Intent intent = new Intent(v.getContext(), AtletaListActivity.class);
                 startActivity(intent);
             }
         });
-        // Show the dummy content as text in a TextView.
+
         if (mItem != null) {
             ((TextView) rootView.findViewById(R.id.atleta_detail)).setText(
                     "ID: " + mItem.getId().toString());

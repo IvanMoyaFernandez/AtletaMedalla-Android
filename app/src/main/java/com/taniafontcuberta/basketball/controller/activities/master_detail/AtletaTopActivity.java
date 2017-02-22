@@ -71,8 +71,8 @@ public class AtletaTopActivity extends AppCompatActivity implements AtletaCallba
         switch (typeSearch.getString("id")){
             case "name":
                 filtrarButton.setInputType(InputType.TYPE_CLASS_NUMBER);
-                filtrarButton.setHint("Filter by name");
-                setTitle("Filter by name");
+                filtrarButton.setHint("Filtrar por nombre");
+                setTitle("Filtrar por nombre");
                 break;
             /*
             case "baskets":
@@ -154,13 +154,20 @@ public class AtletaTopActivity extends AppCompatActivity implements AtletaCallba
 
         @Override
         public void onBindViewHolder(final ViewHolder holder, final int position) {
+            // mostramos la lista de atletas con los siguientes parametros
+            // cogemos la posicion del array que recibimos
             holder.mItem = mValues.get(position);
+            // Id del atleta
             holder.mIdView.setText(mValues.get(position).getId().toString());
+            // Nombre del atleta
             holder.mContentView.setText(mValues.get(position).getNombre());
 
             holder.mView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    // Si el dispositivo está en modo horizontal va a crear dos fragments
+                    // el primero a la izquierda con la lista de atletas
+                    // y a la derecha la información del atleta seleccionado a la izquierda.
                     if (mTwoPane) {
                         Bundle arguments = new Bundle();
                         arguments.putString(AtletaDetailFragment.ARG_ITEM_ID, holder.mItem.getId().toString());
@@ -169,11 +176,13 @@ public class AtletaTopActivity extends AppCompatActivity implements AtletaCallba
                         getSupportFragmentManager().beginTransaction()
                                 .replace(R.id.atleta_detail_container, fragment)
                                 .commit();
+                    // Si el dispositivo está en modo vertical va a crear una nueva actvity
+                    // encima de esta activity (AtletaListActivity).
                     } else {
                         Context context = v.getContext();
                         Intent intent = new Intent(context, AtletaDetailActivity.class);
+                        // A la nueva activity le envía la id del atleta seleccionado
                         intent.putExtra(AtletaDetailFragment.ARG_ITEM_ID, holder.mItem.getId().toString());
-
                         context.startActivity(intent);
                     }
                 }

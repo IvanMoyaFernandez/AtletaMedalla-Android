@@ -38,11 +38,9 @@ public interface AtletaService {
             @Path("id") Long id);
 
 
-    /* FILTERS */
-
+    /* FILTROS */
     @GET("api/atletas/byName/{name}")
-    Call<List<Atleta>> getAtletasByName(
-
+    Call<List<Atleta>> getAtletaByName(
             @Header("Authorization") String Authorization,
             @Path("name") String name);
 /*

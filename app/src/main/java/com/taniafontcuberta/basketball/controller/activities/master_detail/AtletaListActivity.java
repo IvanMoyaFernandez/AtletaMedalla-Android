@@ -47,7 +47,7 @@ public class AtletaListActivity extends AppCompatActivity implements AtletaCallb
         }
 
         // Creamos el boton flotante de abajo a la derecha que hace referencia al
-        // objeto add en la activity activitty_atleta_list
+        // objeto add en la activity activity_atleta_list
         FloatingActionButton add = (FloatingActionButton) findViewById(R.id.add);
         add.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,7 +73,7 @@ public class AtletaListActivity extends AppCompatActivity implements AtletaCallb
 
         });
 */
-        FloatingActionButton searchName = (FloatingActionButton) findViewById(R.id.topName);
+        FloatingActionButton searchName = (FloatingActionButton) findViewById(R.id.topNombre);
         searchName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
