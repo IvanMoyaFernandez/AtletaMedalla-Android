@@ -130,6 +130,11 @@ public class AtletaTopActivity extends AppCompatActivity implements AtletaCallba
     }
 
     @Override
+    public void onSuccess(Atleta atleta) {
+
+    }
+
+    @Override
     public void onFailure(Throwable t) {
         Intent i = new Intent(AtletaTopActivity.this, LoginActivity.class);
         startActivity(i);

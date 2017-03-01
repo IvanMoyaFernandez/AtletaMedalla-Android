@@ -127,9 +127,15 @@ public class AtletaListActivity extends AppCompatActivity implements AtletaCallb
         }
     }
 
+//    @Override
+//    protected void onPostResume() {
+//        super.onPostResume();
+//        AtletaManager.getInstance().getAllAtletas(AtletaListActivity.this);
+//    }
+
     @Override
-    protected void onPostResume() {
-        super.onPostResume();
+    protected void onResume() {
+        super.onResume();
         AtletaManager.getInstance().getAllAtletas(AtletaListActivity.this);
     }
 
@@ -146,6 +152,11 @@ public class AtletaListActivity extends AppCompatActivity implements AtletaCallb
 
     @Override
     public void onSucces() {
+
+    }
+
+    @Override
+    public void onSuccess(Atleta atleta) {
 
     }
 

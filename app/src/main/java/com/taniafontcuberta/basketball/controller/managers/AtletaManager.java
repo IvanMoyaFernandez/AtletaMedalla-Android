@@ -91,6 +91,7 @@ public class AtletaManager {
 
                 if (code == 200 || code == 201) {
                     Log.e("Atleta->", "createAtleta: OK" + 100);
+                    atletaCallback.onSuccess(response.body());
                 } else {
                     atletaCallback.onFailure(new Throwable("ERROR" + code + ", " + response.raw().message()));
                 }

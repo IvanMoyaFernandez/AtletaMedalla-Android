@@ -207,7 +207,7 @@ public class AddEditAtletaActivity extends AppCompatActivity implements AtletaCa
             // createAteta de AtletaManager.java y mostrará el mensage de atleta creado
             if (extras.getString("type").equals("add")) {
                 AtletaManager.getInstance().createAtleta(AddEditAtletaActivity.this, atleta);
-                Toast.makeText(AddEditAtletaActivity.this, "Creado :  " + atleta.getNombre(), Toast.LENGTH_LONG).show();
+
             // En el caso de que el extra recibido por la activity antecesora sea edit la función a realizar será
             // updateAtleta de AtletaManager.java y mostrará el mensage de atleta editado
             } else {
@@ -231,19 +231,26 @@ public class AddEditAtletaActivity extends AppCompatActivity implements AtletaCa
     public void onSucces() {
 
     }
-/*
+
     @Override
-    public void onSuccessTeam(List<Team> teamList) {
-        teams = teamList;
-        adapterTeams = new ArrayAdapter(AddEditAtletaActivity.this, android.R.layout.simple_spinner_item, teams);
-        teamView.setAdapter(adapterTeams);
+    public void onSuccess(Atleta atleta) {
+        Toast.makeText(AddEditAtletaActivity.this, "Creado :  " + atleta.getNombre(), Toast.LENGTH_LONG).show();
+        this.finish();
+    }
 
-        if (extras.getString("type").equals("edit")) {
-            Team team = PlayerManager.getInstance().getPlayer(id).getTeam();
-            teamView.setSelection(adapterTeams.getPosition(team));
-        }
+    /*
+        @Override
+        public void onSuccessTeam(List<Team> teamList) {
+            teams = teamList;
+            adapterTeams = new ArrayAdapter(AddEditAtletaActivity.this, android.R.layout.simple_spinner_item, teams);
+            teamView.setAdapter(adapterTeams);
 
-        /* ADD SELECTED TEAM TO PLAYER */
+            if (extras.getString("type").equals("edit")) {
+                Team team = PlayerManager.getInstance().getPlayer(id).getTeam();
+                teamView.setSelection(adapterTeams.getPosition(team));
+            }
+
+            /* ADD SELECTED TEAM TO PLAYER */
 /*        teamView.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View view, int position, long id) {
