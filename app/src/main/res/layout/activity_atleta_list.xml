@@ -34,9 +34,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        android:layout_marginLeft="250dp"
         android:layout_marginBottom="10dp"
-        android:src="@mipmap/add" />
+        android:layout_marginLeft="250dp"
+        android:src="@mipmap/add"
+        app:backgroundTint="@android:color/holo_green_light" />
 
     <!-- <android.support.design.widget.FloatingActionButton
         android:id="@+id/topBaskets"
@@ -52,9 +53,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        android:layout_marginRight="250dp"
         android:layout_marginBottom="10dp"
-        android:src="@mipmap/head" />
+        android:layout_marginRight="250dp"
+        android:src="@mipmap/head"
+        app:backgroundTint="@android:color/holo_green_light" />
 <!--
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/topFechaNacimiento"

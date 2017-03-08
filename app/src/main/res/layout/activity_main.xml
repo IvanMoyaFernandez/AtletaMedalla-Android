@@ -164,12 +164,12 @@
         android:id="@+id/main_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Ver lista de atletas"
-        android:gravity="center"
-        android:textColor="@color/white"
-        android:background="@color/colorAccent"
         android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:background="@android:color/holo_green_light"
+        android:gravity="center"
         android:padding="10dp"
-        android:layout_centerHorizontal="true" />
+        android:text="Ver lista de atletas"
+        android:textColor="@color/white" />
 
 </RelativeLayout>

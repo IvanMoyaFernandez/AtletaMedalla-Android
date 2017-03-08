@@ -44,8 +44,9 @@
         android:id="@+id/edit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@mipmap/edit"
         android:layout_marginLeft="250dp"
+        android:src="@mipmap/edit"
+        app:backgroundTint="@android:color/holo_green_light"
         app:layout_anchor="@+id/atleta_detail_container" />
 
 </android.support.design.widget.CoordinatorLayout>
